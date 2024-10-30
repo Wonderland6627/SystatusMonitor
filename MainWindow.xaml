@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SystatusMonitorProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="400" Width="300">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <!-- Menu Bar -->
+        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10">
+            <Button Content="General" Click="Button_Click"/>
+            <Button Content="Monitoring" Click="Button_Click"/>
+            <Button Content="Memory Performance" Click="Button_Click"/>
+            <Button Content="Storage Capacity" Click="Button_Click"/>
+            <Button Content="Battery State" Click="Button_Click"/>
+            <Button Content="Network Connection" Click="Button_Click"/>
+            <Button Content="Experimental feature" Click="Button_Click"/>
+            <Button Content="System Info Bar(β)" Click="Button_Click"/>
+        </StackPanel>
+
+        <!-- Content Area -->
+        <StackPanel Grid.Row="1" x:Name="contentPanel">
+            <!-- General Information -->
+            <TextBlock Text="General Information" FontSize="24" Margin="20"/>
+            <!-- Add more content here as needed -->
+        </StackPanel>
     </Grid>
 </Window>
