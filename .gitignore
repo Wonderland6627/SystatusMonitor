@@ -1,0 +1,55 @@
+# Ignore Visual Studio files
+.vs/
+*.user
+*.suo
+*.cache
+*.vspscc
+*.bin
+*.obj
+*.pdb
+*.dll
+*.exe
+*.sln.docstates
+
+# Ignore build output
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Oo]bj/
+[Bb]in/
+
+# Ignore NuGet packages
+packages/
+*.nupkg
+
+# Ignore Resharper files
+_ReSharper*/
+*.ReSharper*
+
+# Ignore Visual Studio Code files
+.vscode/
+
+# Ignore Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Ignore user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Oo]bj/
+
+# Ignore Node.js related files
+node_modules/
