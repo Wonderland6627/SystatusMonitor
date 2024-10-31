@@ -20,6 +20,8 @@ namespace SystatusMonitorProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        private FloatWindow floatWindow;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -109,6 +111,39 @@ namespace SystatusMonitorProject
         {
             // Add system info bar information to the content panel
             contentPanel.Children.Add(new TextBlock { Text = "System Info Bar(β)", FontSize = 24, Margin = new Thickness(20) });
+            ShowFloatWindow();
+        }
+
+        private void ShowMainWindow()
+        {
+            if (floatWindow != null && floatWindow.IsVisible)
+            {
+                floatWindow.Close();
+            }
+            this.Show();
+            this.WindowState = WindowState.Normal;
+        }
+
+        private void ShowFloatWindow()
+        {
+            //if (!this.IsVisible)
+            {
+                if (floatWindow == null || !floatWindow.IsLoaded)
+                {
+                    floatWindow = new FloatWindow();
+                    floatWindow.Show();
+                }
+                this.Hide();
+            }
+        }
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            base.OnStateChanged(e);
+            if (WindowState == WindowState.Minimized)
+            {
+                this.Hide();
+            }
         }
     }
 }
