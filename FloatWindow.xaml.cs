@@ -25,15 +25,23 @@ namespace SystatusMonitorProject
         public FloatWindow()
         {
             InitializeComponent();
+            SetInitPosition();
 
             this.MouseLeftButtonDown += new MouseButtonEventHandler(DragWindow);
         }
 
+        private void SetInitPosition()
+        {
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
+
+            this.Left = screenWidth - this.Width - 24;
+            this.Top = screenHeight - this.Height - 48 - 24;
+        }
+
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
-            clickPosition = e.GetPosition(this);
             this.DragMove();
-            mousePosition = this.PointFromScreen(new Point(0, 0));
         }
     }
 }

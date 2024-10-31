@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Forms;
+using Button = System.Windows.Controls.Button;
 
 namespace SystatusMonitorProject
 {
@@ -21,104 +12,53 @@ namespace SystatusMonitorProject
     public partial class MainWindow : Window
     {
         private FloatWindow floatWindow;
+        private NotifyIcon notifyIcon;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            CreateFloatWindow();
+            CreateNotifyIcon();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CreateFloatWindow()
         {
-            // Get the button's content
-            string buttonContent = (sender as Button)?.Content.ToString();
-
-            // Clear the content panel
-            contentPanel.Children.Clear();
-
-            // Display the selected content
-            switch (buttonContent)
-            {
-                case "General":
-                    DisplayGeneralInfo();
-                    break;
-                case "Monitoring":
-                    DisplayMonitoringInfo();
-                    break;
-                case "Memory Performance":
-                    DisplayMemoryPerformance();
-                    break;
-                case "Storage Capacity":
-                    DisplayStorageCapacity();
-                    break;
-                case "Battery State":
-                    DisplayBatteryState();
-                    break;
-                case "Network Connection":
-                    DisplayNetworkConnection();
-                    break;
-                case "Experimental feature":
-                    DisplayExperimentalFeature();
-                    break;
-                case "System Info Bar(β)":
-                    DisplaySystemInfoBar();
-                    break;
-            }
+            if (floatWindow != null) { return; }
+            floatWindow = new FloatWindow();
         }
 
-        private void DisplayGeneralInfo()
+        private void CreateNotifyIcon()
         {
-            // Add general information to the content panel
-            contentPanel.Children.Add(new TextBlock { Text = "General Information", FontSize = 24, Margin = new Thickness(20) });
+            if (notifyIcon != null) { return; }
+            notifyIcon = new NotifyIcon();
+            notifyIcon.Icon = System.Drawing.SystemIcons.Application;
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+            contextMenuStrip.Items.Add("主页", null, (sender, e) => {
+                ShowMainWindow();
+            });
+            contextMenuStrip.Items.Add("悬浮显示", null, (sender, e) => {
+                ShowFloatWindow();
+            });
+            contextMenuStrip.Items.Add("退出", null, (sender, e) => {
+                notifyIcon.Visible = false;
+                notifyIcon.Dispose();
+                System.Windows.Forms.Application.Exit();
+            });
+            notifyIcon.ContextMenuStrip = contextMenuStrip;
+            notifyIcon.Visible = true;
         }
 
-        private void DisplayMonitoringInfo()
+        private void ShowFloatWindow_Click(object sender, RoutedEventArgs e)
         {
-            // Add monitoring information to the content panel
-            contentPanel.Children.Add(new TextBlock { Text = "Monitoring Information", FontSize = 24, Margin = new Thickness(20) });
-        }
-
-        private void DisplayMemoryPerformance()
-        {
-            // Add memory performance information to the content panel
-            contentPanel.Children.Add(new TextBlock { Text = "Memory Performance", FontSize = 24, Margin = new Thickness(20) });
-        }
-
-        private void DisplayStorageCapacity()
-        {
-            // Add storage capacity information to the content panel
-            contentPanel.Children.Add(new TextBlock { Text = "Storage Capacity", FontSize = 24, Margin = new Thickness(20) });
-        }
-
-        private void DisplayBatteryState()
-        {
-            // Add battery state information to the content panel
-            contentPanel.Children.Add(new TextBlock { Text = "Battery State", FontSize = 24, Margin = new Thickness(20) });
-        }
-
-        private void DisplayNetworkConnection()
-        {
-            // Add network connection information to the content panel
-            contentPanel.Children.Add(new TextBlock { Text = "Network Connection", FontSize = 24, Margin = new Thickness(20) });
-        }
-
-        private void DisplayExperimentalFeature()
-        {
-            // Add experimental feature information to the content panel
-            contentPanel.Children.Add(new TextBlock { Text = "Experimental Feature", FontSize = 24, Margin = new Thickness(20) });
-        }
-
-        private void DisplaySystemInfoBar()
-        {
-            // Add system info bar information to the content panel
-            contentPanel.Children.Add(new TextBlock { Text = "System Info Bar(β)", FontSize = 24, Margin = new Thickness(20) });
             ShowFloatWindow();
         }
 
         private void ShowMainWindow()
         {
-            if (floatWindow != null && floatWindow.IsVisible)
+            if (floatWindow != null)
             {
-                floatWindow.Close();
+                floatWindow.Hide();
             }
             this.Show();
             this.WindowState = WindowState.Normal;
@@ -126,15 +66,8 @@ namespace SystatusMonitorProject
 
         private void ShowFloatWindow()
         {
-            //if (!this.IsVisible)
-            {
-                if (floatWindow == null || !floatWindow.IsLoaded)
-                {
-                    floatWindow = new FloatWindow();
-                    floatWindow.Show();
-                }
-                this.Hide();
-            }
+            floatWindow.Show();
+            this.Hide();
         }
 
         protected override void OnStateChanged(EventArgs e)

@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SystatusMonitorProject"
         mc:Ignorable="d"
-        Title="FloatWindow" Height="100" Width="100">
+        Title="FloatWindow" Height="100" Width="100"
+        WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent" Topmost="True">
     <Grid>
         <Ellipse Fill="DodgerBlue" Stroke="Black" StrokeThickness="2"/>
         <!-- 可以添加一个关闭按钮或其他控件 -->

@@ -14,21 +14,7 @@
 
         <!-- Menu Bar -->
         <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10">
-            <Button Content="General" Click="Button_Click"/>
-            <Button Content="Monitoring" Click="Button_Click"/>
-            <Button Content="Memory Performance" Click="Button_Click"/>
-            <Button Content="Storage Capacity" Click="Button_Click"/>
-            <Button Content="Battery State" Click="Button_Click"/>
-            <Button Content="Network Connection" Click="Button_Click"/>
-            <Button Content="Experimental feature" Click="Button_Click"/>
-            <Button Content="System Info Bar(β)" Click="Button_Click"/>
-        </StackPanel>
-
-        <!-- Content Area -->
-        <StackPanel Grid.Row="1" x:Name="contentPanel">
-            <!-- General Information -->
-            <TextBlock Text="General Information" FontSize="24" Margin="20"/>
-            <!-- Add more content here as needed -->
+            <Button Content="悬浮窗模式" Click="ShowFloatWindow_Click"/>
         </StackPanel>
     </Grid>
 </Window>
