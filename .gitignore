@@ -7,7 +7,6 @@
 *.bin
 *.obj
 *.pdb
-*.dll
 *.exe
 *.sln.docstates
 
