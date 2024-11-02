@@ -8,7 +8,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resources\cat\cat_0.ico" />
+    <None Remove="resources\cat\cat_1.ico" />
+    <None Remove="resources\cat\cat_2.ico" />
+    <None Remove="resources\cat\cat_3.ico" />
+    <None Remove="resources\cat\cat_4.ico" />
+    <None Remove="resources\kunkun\kunkun_0.ico" />
+    <None Remove="resources\kunkun\kunkun_1.ico" />
+    <None Remove="resources\kunkun\kunkun_10.ico" />
+    <None Remove="resources\kunkun\kunkun_11.ico" />
+    <None Remove="resources\kunkun\kunkun_12.ico" />
+    <None Remove="resources\kunkun\kunkun_13.ico" />
+    <None Remove="resources\kunkun\kunkun_14.ico" />
+    <None Remove="resources\kunkun\kunkun_15.ico" />
+    <None Remove="resources\kunkun\kunkun_16.ico" />
+    <None Remove="resources\kunkun\kunkun_2.ico" />
+    <None Remove="resources\kunkun\kunkun_3.ico" />
+    <None Remove="resources\kunkun\kunkun_4.ico" />
+    <None Remove="resources\kunkun\kunkun_5.ico" />
+    <None Remove="resources\kunkun\kunkun_6.ico" />
+    <None Remove="resources\kunkun\kunkun_7.ico" />
+    <None Remove="resources\kunkun\kunkun_8.ico" />
+    <None Remove="resources\kunkun\kunkun_9.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +44,31 @@
     <Reference Include="System.Windows.Forms">
       <HintPath>usingdlls\System.Windows.Forms.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\cat\cat_0.ico" />
+    <Resource Include="resources\cat\cat_1.ico" />
+    <Resource Include="resources\cat\cat_2.ico" />
+    <Resource Include="resources\cat\cat_3.ico" />
+    <Resource Include="resources\cat\cat_4.ico" />
+    <Resource Include="resources\kunkun\kunkun_0.ico" />
+    <Resource Include="resources\kunkun\kunkun_1.ico" />
+    <Resource Include="resources\kunkun\kunkun_10.ico" />
+    <Resource Include="resources\kunkun\kunkun_11.ico" />
+    <Resource Include="resources\kunkun\kunkun_12.ico" />
+    <Resource Include="resources\kunkun\kunkun_13.ico" />
+    <Resource Include="resources\kunkun\kunkun_14.ico" />
+    <Resource Include="resources\kunkun\kunkun_15.ico" />
+    <Resource Include="resources\kunkun\kunkun_16.ico" />
+    <Resource Include="resources\kunkun\kunkun_2.ico" />
+    <Resource Include="resources\kunkun\kunkun_3.ico" />
+    <Resource Include="resources\kunkun\kunkun_4.ico" />
+    <Resource Include="resources\kunkun\kunkun_5.ico" />
+    <Resource Include="resources\kunkun\kunkun_6.ico" />
+    <Resource Include="resources\kunkun\kunkun_7.ico" />
+    <Resource Include="resources\kunkun\kunkun_8.ico" />
+    <Resource Include="resources\kunkun\kunkun_9.ico" />
   </ItemGroup>
 
 </Project>

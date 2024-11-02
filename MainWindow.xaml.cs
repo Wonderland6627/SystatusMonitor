@@ -1,8 +1,15 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Diagnostics;
 using System.Windows.Forms;
-using Button = System.Windows.Controls.Button;
+using System.Resources;
+using System.ComponentModel;
+using Microsoft.Win32;
+using System.Windows.Media.Imaging;
+using System.IO;
+using System.Media;
 
 namespace SystatusMonitorProject
 {
@@ -11,72 +18,141 @@ namespace SystatusMonitorProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        private FloatWindow floatWindow;
-        private NotifyIcon notifyIcon;
-
         public MainWindow()
         {
             InitializeComponent();
-
-            CreateFloatWindow();
             CreateNotifyIcon();
-        }
 
-        private void CreateFloatWindow()
-        {
-            if (floatWindow != null) { return; }
-            floatWindow = new FloatWindow();
-        }
-
-        private void CreateNotifyIcon()
-        {
-            if (notifyIcon != null) { return; }
-            notifyIcon = new NotifyIcon();
-            notifyIcon.Icon = System.Drawing.SystemIcons.Application;
-            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
-            contextMenuStrip.Items.Add("主页", null, (sender, e) => {
-                ShowMainWindow();
-            });
-            contextMenuStrip.Items.Add("悬浮显示", null, (sender, e) => {
-                ShowFloatWindow();
-            });
-            contextMenuStrip.Items.Add("退出", null, (sender, e) => {
-                notifyIcon.Visible = false;
-                notifyIcon.Dispose();
-                System.Windows.Forms.Application.Exit();
-            });
-            notifyIcon.ContextMenuStrip = contextMenuStrip;
-            notifyIcon.Visible = true;
-        }
-
-        private void ShowFloatWindow_Click(object sender, RoutedEventArgs e)
-        {
-            ShowFloatWindow();
-        }
-
-        private void ShowMainWindow()
-        {
-            if (floatWindow != null)
-            {
-                floatWindow.Hide();
-            }
-            this.Show();
-            this.WindowState = WindowState.Normal;
-        }
-
-        private void ShowFloatWindow()
-        {
-            floatWindow.Show();
             this.Hide();
         }
 
-        protected override void OnStateChanged(EventArgs e)
+        //protected override void OnStateChanged(EventArgs e)
+        //{
+        //    base.OnStateChanged(e);
+        //    if (WindowState == WindowState.Minimized)
+        //    {
+        //        this.Hide();
+        //    }
+        //}
+
+        private void Exit(object sender, EventArgs e)
         {
-            base.OnStateChanged(e);
-            if (WindowState == WindowState.Minimized)
+            notifyIcon.Visible = false;
+            System.Windows.Forms.Application.Exit();
+            System.Windows.Application.Current.Shutdown();
+        }
+    }
+
+    /// <summary>
+    /// 处理NotifyIcon相关
+    /// </summary>
+    public partial class MainWindow
+    {
+        private NotifyIcon notifyIcon;
+        private ToolStripMenuItem runnerMenuItem;
+        private ToolStripMenuItem startupMenuItem;
+
+        private string runnerName = "cat";
+        private string iconResDirPath = "pack://application:,,,/SystatusMonitorProject;component/resources";
+        private Icon[] icons;
+        private int currentIconIndex = 0;
+        private Timer iconAnimTimer = new Timer();
+
+        private void CreateNotifyIcon()
+        {
+            runnerMenuItem = new ToolStripMenuItem("Runner", null, new ToolStripMenuItem[]
             {
-                this.Hide();
+                new ToolStripMenuItem("Cat", null, SetRunner)
+                {
+                    Checked = runnerName.Equals("cat"),
+                },
+                new ToolStripMenuItem("Kunkun", null, SetRunner)
+                {
+                    Checked = runnerName.Equals("kunkun"),
+                },
+            });
+
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip(new Container());
+            contextMenuStrip.Items.AddRange(new ToolStripItem[]
+            {
+                runnerMenuItem,
+
+                new ToolStripSeparator(),
+
+                new ToolStripMenuItem("Exit", null, Exit)
+            });
+
+            notifyIcon = new NotifyIcon();
+            notifyIcon.ContextMenuStrip = contextMenuStrip;
+            notifyIcon.Visible = true;
+
+            LoadIcons();
+            SetIconAimation();
+        }
+
+        private void SetRunner(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            UpdateCheckedState(menuItem, runnerMenuItem);
+            runnerName = menuItem.Text.ToLower();
+            LoadIcons();
+        }
+
+        private void UpdateCheckedState(ToolStripMenuItem sender, ToolStripMenuItem menuItem)
+        {
+            foreach (ToolStripMenuItem item in menuItem.DropDownItems)
+            {
+                item.Checked = false;
             }
+            sender.Checked = true;
+        }
+
+        private void LoadIcons()
+        {
+            int capacity = 5;
+            string lowerRunnerName = runnerName.ToLower();
+            switch (lowerRunnerName)
+            {
+                case "cat":
+                    capacity = 5; break;
+                case "kunkun":
+                    capacity = 17; break;
+                default:
+                    icons = new Icon[1]
+                    {
+                        SystemIcons.Application,
+                    };
+                    notifyIcon.Icon = icons[0];
+                    return;
+            }
+
+            List<Icon> list = new List<Icon>(capacity);
+            for (int index = 0; index < capacity; index++)
+            {
+                string iconPath = $"{iconResDirPath}/{lowerRunnerName}/{lowerRunnerName}_{index}.ico";
+                Stream iconStream = System.Windows.Application.GetResourceStream(new Uri(iconPath)).Stream;
+                Icon icon = new Icon(iconStream);
+                list.Add(icon);
+            }
+            icons = list.ToArray();
+            notifyIcon.Icon = icons[0];
+        }
+
+        private void SetIconAimation()
+        {
+            iconAnimTimer.Interval = 100;
+            iconAnimTimer.Tick += new EventHandler(IconAnimationTick);
+            iconAnimTimer.Start();
+        }
+
+        private void IconAnimationTick(object sender, EventArgs e)
+        {
+            if (icons.Length <= currentIconIndex)
+            {
+                currentIconIndex = 0;
+            }
+            notifyIcon.Icon = icons[currentIconIndex];
+            currentIconIndex = (currentIconIndex + 1) % icons.Length;
         }
     }
 }

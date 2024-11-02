@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:SystatusMonitorProject"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="300">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,7 +17,9 @@
 
         <!-- Menu Bar -->
         <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10">
-            <Button Content="悬浮窗模式" Click="ShowFloatWindow_Click"/>
+            <TextBlock Text="{Binding CpuUsage}" FontSize="24"/>
+            <TextBlock Text="{Binding MemoryUsage}" FontSize="24"/>
+            <!--<Button Content="悬浮窗模式" Click="ShowFloatWindow_Click"/>-->
         </StackPanel>
     </Grid>
 </Window>

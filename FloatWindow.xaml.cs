@@ -19,9 +19,6 @@ namespace SystatusMonitorProject
     /// </summary>
     public partial class FloatWindow : Window
     {
-        private Point clickPosition;
-        private Point mousePosition;
-
         public FloatWindow()
         {
             InitializeComponent();
