@@ -1,12 +1,11 @@
-﻿using SystatusMonitorProject.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SystatusMonitorProject.scripts
+namespace SystatusMonitor.scripts
 {
     internal class HardwareInfoService
     {
@@ -18,7 +17,7 @@ namespace SystatusMonitorProject.scripts
             var cpuInfo = new ManagementObjectSearcher("SELECT LoadPercentage FROM Win32_Processor").Get();
             foreach (var item in cpuInfo)
             {
-                hardwareInfo.CpuUsage = (UInt16)item["LoadPercentage"];
+                hardwareInfo.CpuUsage = (ushort)item["LoadPercentage"];
             }
 
             // 获取内存使用情况

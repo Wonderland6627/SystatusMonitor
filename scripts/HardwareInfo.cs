@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SystatusMonitorProject.ViewModels
+namespace SystatusMonitor.scripts
 {
     internal class HardwareInfo
     {

@@ -1,7 +1,7 @@
-﻿<Application x:Class="SystatusMonitorProject.App"
+﻿<Application x:Class="SystatusMonitor.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:SystatusMonitorProject"
+             xmlns:local="clr-namespace:SystatusMonitor"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

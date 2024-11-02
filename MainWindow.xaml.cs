@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.IO;
 using System.Media;
 
-namespace SystatusMonitorProject
+namespace SystatusMonitor
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -53,7 +53,7 @@ namespace SystatusMonitorProject
         private ToolStripMenuItem startupMenuItem;
 
         private string runnerName = "cat";
-        private string iconResDirPath = "pack://application:,,,/SystatusMonitorProject;component/resources";
+        private string iconResDirPath = "pack://application:,,,/SystatusMonitor;component/resources";
         private Icon[] icons;
         private int currentIconIndex = 0;
         private Timer iconAnimTimer = new Timer();

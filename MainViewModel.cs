@@ -1,5 +1,4 @@
-﻿using SystatusMonitorProject.scripts;
-using SystatusMonitorProject.ViewModels;
+﻿using SystatusMonitor.scripts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace SystatusMonitorProject
+namespace SystatusMonitor
 {
     internal class MainViewModel : INotifyPropertyChanged
     {
