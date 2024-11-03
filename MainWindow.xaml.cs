@@ -30,7 +30,7 @@ namespace SystatusMonitor
             CreateFloatWindow();
             CreateTimer();
 
-            //this.Hide();
+            this.Hide();
         }
 
         public void CreateTimer()
