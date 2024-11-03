@@ -18,12 +18,44 @@ namespace SystatusMonitor
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel viewModel;
+
+        private Timer updateTimer;
+
         public MainWindow()
         {
             InitializeComponent();
+            viewModel = new MainViewModel();
             CreateNotifyIcon();
+            CreateFloatWindow();
+            CreateTimer();
 
-            this.Hide();
+            //this.Hide();
+        }
+
+        public void CreateTimer()
+        {
+            updateTimer = new Timer();
+            updateTimer.Interval = 2000;
+            updateTimer.Tick += UpdateTimer_Tick;
+            updateTimer.Start();
+        }
+
+        private void UpdateTimer_Tick(object sender, EventArgs e)
+        {
+            if (viewModel == null)
+            {
+                return;
+            }
+
+            viewModel.Tick();
+            UpdateMainWindow();
+            UpdateFloatWindow();
+        }
+
+        private void UpdateMainWindow()
+        {
+            cpuUsageTxt.Text = $"{viewModel.CpuUsage.ToString("f2")}%";
         }
 
         //protected override void OnStateChanged(EventArgs e)
@@ -37,7 +69,11 @@ namespace SystatusMonitor
 
         private void Exit(object sender, EventArgs e)
         {
+            updateTimer.Stop();
+            floatWindow.Hide();
             notifyIcon.Visible = false;
+            notifyIcon.Dispose();
+            viewModel.Dispose();
             System.Windows.Forms.Application.Exit();
             System.Windows.Application.Current.Shutdown();
         }
@@ -46,7 +82,7 @@ namespace SystatusMonitor
     /// <summary>
     /// 处理NotifyIcon相关
     /// </summary>
-    public partial class MainWindow
+    partial class MainWindow
     {
         private NotifyIcon notifyIcon;
         private ToolStripMenuItem runnerMenuItem;
@@ -153,6 +189,34 @@ namespace SystatusMonitor
             }
             notifyIcon.Icon = icons[currentIconIndex];
             currentIconIndex = (currentIconIndex + 1) % icons.Length;
+        }
+    }
+
+    /// <summary>
+    /// 处理FloatWindow相关
+    /// </summary>
+    partial class MainWindow
+    {
+        private FloatWindow floatWindow;
+
+        private void CreateFloatWindow()
+        {
+            floatWindow = new FloatWindow();
+            floatWindow.Show();
+        }
+
+        private void UpdateFloatWindow()
+        {
+            if (viewModel == null)
+            {
+                return;
+            }
+            if (floatWindow == null || !floatWindow.IsVisible)
+            {
+                return;
+            }
+
+            floatWindow.UpdateGrid(cpuUsage: viewModel.CpuUsage);
         }
     }
 }

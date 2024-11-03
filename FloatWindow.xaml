@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:SystatusMonitor"
         mc:Ignorable="d"
         Title="FloatWindow" Height="100" Width="100"
-        WindowStyle="None" AllowsTransparency="True"
-        Background="Transparent" Topmost="True">
+        WindowStyle="None" Topmost="True"
+        AllowsTransparency="True" Background="Transparent" >
     <Grid>
         
         <Ellipse Width="100" Height="100" Stroke="Transparent">

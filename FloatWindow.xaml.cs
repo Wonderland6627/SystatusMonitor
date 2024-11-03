@@ -60,16 +60,16 @@ namespace SystatusMonitor
             };
             gpuProgress.SetPath(gpuPath);
 
-            double progress = 0;
-            var timer = new System.Windows.Forms.Timer();
-            timer.Tick += (object sender, EventArgs e) =>
-            {
-                progress+=0.01;
-                SetProgressValue(progress, cpuProgress);
-            };
-            timer.Start();
+            //double progress = 0;
+            //var timer = new System.Windows.Forms.Timer();
+            //timer.Tick += (object sender, EventArgs e) =>
+            //{
+            //    progress+=0.01;
+            //    SetProgressValue(progress, cpuProgress);
+            //};
+            //timer.Start();
 
-            SetProgressValue(0.33, gpuProgress);
+            //SetProgressValue(0.33, gpuProgress);
         }
 
         private void SetInitPosition()
@@ -84,6 +84,11 @@ namespace SystatusMonitor
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+        }
+
+        public void UpdateGrid(double cpuUsage = 0)
+        {
+            SetProgressValue(cpuUsage / 100d, cpuProgress);
         }
 
         /// <summary>
@@ -101,7 +106,7 @@ namespace SystatusMonitor
             double radius = leftStart - topStart; //环形半径
             bool isLagreCircle = false; //是否优势弧，即大于180度的弧形
 
-            lbValue.Content = (value * 100).ToString("0") + "%";
+            lbValue.Content = (value * 100).ToString("f2") + "%";
 
             //小于90度
             if (angle <= 90) //第一象限
