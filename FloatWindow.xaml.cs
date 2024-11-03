@@ -51,25 +51,25 @@ namespace SystatusMonitor
                 edgeLen = 100,
                 strokeThickness = 10,
             };
-            cpuProgress.SetPath(cpuProgressBar);
+            cpuProgress.SetPath(cpuPath);
 
             gpuProgress = new CircleProgress()
             {
                 edgeLen = 70,
                 strokeThickness = 10,
             };
-            gpuProgress.SetPath(gpuProgressBar);
+            gpuProgress.SetPath(gpuPath);
 
             double progress = 0;
             var timer = new System.Windows.Forms.Timer();
             timer.Tick += (object sender, EventArgs e) =>
             {
                 progress+=0.01;
-                SetValue(progress, cpuProgress);
+                SetProgressValue(progress, cpuProgress);
             };
             timer.Start();
 
-            SetValue(0.33, gpuProgress);
+            SetProgressValue(0.33, gpuProgress);
         }
 
         private void SetInitPosition()
@@ -89,7 +89,7 @@ namespace SystatusMonitor
         /// <summary>
         /// value: [0, 1]
         /// </summary>
-        private void SetValue(double value, CircleProgress circleProgress)
+        private void SetProgressValue(double value, CircleProgress circleProgress)
         {
             double angle = value * 360;
             //起始点
@@ -140,7 +140,6 @@ namespace SystatusMonitor
             Point arcEndPt = new Point(endLeft, endTop);
             Size arcSize = new Size(radius, radius);
             ArcSegment arcsegment = new ArcSegment(arcEndPt, arcSize, 0, isLagreCircle, SweepDirection.Clockwise, true);
-
             PathSegmentCollection pathsegmentCollection = new PathSegmentCollection
             {
                 arcsegment
@@ -158,12 +157,6 @@ namespace SystatusMonitor
             {
                 Figures = pathFigureCollection
             };
-
-            if (angle == 360) //达到100%则闭合整个
-            {
-                circleProgress.progressPath.Data = Geometry.Parse(cpuProgressBar.Data.ToString() + " z");
-                return;
-            }
             circleProgress.progressPath.Data = pathGeometry;
         }
     }

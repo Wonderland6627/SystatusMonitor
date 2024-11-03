@@ -16,8 +16,10 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <Path Name="cpuProgressBar" Stroke="#FF8533" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
-        <Path Name="gpuProgressBar" Stroke="#FF1" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+        <Path Name="cpuPathBG" Stroke="#808080" StrokeThickness="10"
+        Data="M50,10 A40,40 0 1,1 50,90 A40,40 0 1,1 50,10"/>
+        <Path Name="cpuPath" Stroke="#FF8533" StrokeStartLineCap="Round" StrokeEndLineCap="Round" />
+        <Path Name="gpuPath" Stroke="#FF1" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
         
         <Label Name="lbValue" Content="50%" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
 
