@@ -9,7 +9,17 @@
         WindowStyle="None" AllowsTransparency="True"
         Background="Transparent" Topmost="True">
     <Grid>
-        <Ellipse Fill="DodgerBlue" Stroke="Black" StrokeThickness="2"/>
-        <!-- 可以添加一个关闭按钮或其他控件 -->
+        
+        <Ellipse Width="100" Height="100" Stroke="Transparent">
+            <Ellipse.Fill>
+                <SolidColorBrush Color="#FF1E90FF" Opacity="1"/>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <Path Name="cpuProgressBar" Stroke="#FF8533" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+        <Path Name="gpuProgressBar" Stroke="#FF1" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+        
+        <Label Name="lbValue" Content="50%" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+
     </Grid>
 </Window>
