@@ -1,54 +1,44 @@
-# Ignore Visual Studio files
+# Visual Studio files
 .vs/
-*.user
-*.suo
-*.cache
-*.vspscc
-*.bin
-*.obj
-*.pdb
-*.exe
-*.sln.docstates
-
-# Ignore build output
-[Dd]ebug/
-[Rr]elease/
-x64/
-x86/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-[Oo]bj/
-[Bb]in/
-
-# Ignore NuGet packages
-packages/
-*.nupkg
-
-# Ignore Resharper files
-_ReSharper*/
-*.ReSharper*
-
-# Ignore Visual Studio Code files
-.vscode/
-
-# Ignore Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Ignore user-specific files
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+*.cache
+*.vspscc
 
-# Ignore build results
+# Build output
+[Bb]in/
+[Oo]bj/
 [Dd]ebug/
 [Rr]elease/
 x64/
 x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
-[Oo]bj/
 
-# Ignore Node.js related files
-node_modules/
+# Build artifacts
+*.bin
+*.obj
+*.pdb
+*.exe
+*.dll
+*.rar
+
+# NuGet packages
+packages/
+*.nupkg
+
+# Resharper files
+_ReSharper*/
+*.ReSharper*
+
+# Visual Studio Code files
+.vscode/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Keep usingdlls directory (project dependencies)
+!usingdlls/**/*.dll
